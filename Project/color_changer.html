@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .button {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 10px;
+            border-radius: 50%;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        #grey {
+            background: grey;
+        }
+
+        #white {
+            background: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        #blue {
+            background: blue;
+        }
+
+        #yellow {
+            background: gold;
+            color: #333;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        nav a {
+            color: inherit;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .canvas {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <nav>
+            <a href="">HOME</a>
+            <a href="">ABOUT</a>
+            <a href="">CONTACT</a>
+        </nav>
+        <div class="canvas">
+            <span class="button" id="grey">1</span>
+            <span class="button" id="white">2</span>
+            <span class="button" id="blue">3</span>
+            <span class="button" id="yellow">4</span>
+
+            <h2>
+                Try clicking on one of the colors above
+                <span>to change the background color</span>
+            </h2>
+        </div>
+    </center>
+    <script>
+        const buttons = document.querySelectorAll('.button');
+        const body = document.body;
+
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                if (button.id === 'grey') {
+                    body.style.backgroundColor = 'grey';
+                    body.style.color = 'white';
+                } else if (button.id === 'white') {
+                    body.style.backgroundColor = 'white';
+                    body.style.color = '#222';
+                } else if (button.id === 'blue') {
+                    body.style.backgroundColor = 'blue';
+                    body.style.color = 'white';
+                } else if (button.id === 'yellow') {
+                    body.style.backgroundColor = 'gold';
+                    body.style.color = '#222';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

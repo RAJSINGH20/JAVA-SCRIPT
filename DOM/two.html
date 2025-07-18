@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM | js</title>
+</head>
+<body style="background-color: black; color: white;">
+    <div class="parent">
+        <div class="day">monday</div>
+        <div class="day">tuesday</div>
+        <div class="day">wednasday</div>
+        <div class="day">thrusday</div>
+        <div class="day">Friday</div>
+    </div>
+</body>
+<script>
+    const day = document.querySelector('.day').style.color = 'red'; // fixed typo
+    const parent = document.querySelector('.parent')
+    console.log(parent);
+    console.log(parent.children) // fixed typo
+
+    for (let i = 0; i < parent.children.length; i++) { // fixed typo and used .length
+        const element =  parent.children[i].innerHTML;
+        console.log(element);
+    }
+    console.log(day);
+    console.log("nodes :", parent.childNodes); // fixed typo
+    console.log("children :", parent.children); // fixed typo
+    
+</script>
+</html>

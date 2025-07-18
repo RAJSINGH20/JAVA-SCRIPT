@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            margin-top: 48px;
+            color: #f8f8f8;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            background: #fff;
+            padding: 32px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+            margin-top: 32px;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            padding: 10px 12px;
+            border: 1px solid #bdbdbd;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            margin-bottom: 4px;
+            background: #f7f7f7;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            background: #fff;
+        }
+
+        button {
+            background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+        }
+
+        #result {
+            margin-top: 32px;
+            font-size: 1.25rem;
+            color: #f8f8f8;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 16px 28px;
+            border-radius: 8px;
+            min-width: 320px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        @media (max-width: 500px) {
+
+            form,
+            #result {
+                min-width: unset;
+                width: 90vw;
+                padding: 18px 8vw;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>BMI Calculator</h2>
+    <form id="bmiForm">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" required step="any"><br><br>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" required step="any"><br><br>
+        <button type="submit">Calculate BMI</button>
+    </form>
+    <p id="result">Your BMI is: <br></p>
+
+    <script>
+        const form = document.querySelector('form');
+        const result = document.querySelector('#result');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const height = parseFloat(document.querySelector('#height').value);
+            const weight = parseFloat(document.querySelector('#weight').value);
+
+            if (height === '' || height <= 0 || isNaN(height)) {
+                result.innerHTML = `Please enter valid numbers for weight and height. ${height}`;
+            }
+            else if (weight === '' || weight <= 0 || isNaN(weight)) {
+                result.innerHTML = `Please enter valid numbers for weight and height. ${weight}`;
+            } else {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+                // Display the result
+                result.innerHTML = `<span>${bmi}</span>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

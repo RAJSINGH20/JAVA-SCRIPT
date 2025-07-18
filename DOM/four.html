@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="background-color: black; color: white;">
+    <ul class="language">
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Java</li>
+    </ul>
+</body>
+<style>
+    .language {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .language li {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+
+    .language li:hover {
+        background-color: #555;
+    }
+</style>
+<script>
+    function addLanguage(langname) {
+        const li = document.createElement('li');
+        li.textContent = langname;
+        document.querySelector('.language').appendChild(li);
+    }
+    addLanguage('C++');
+    addLanguage('C#');
+    addLanguage('Ruby');
+    addLanguage('Go');
+
+    function addoptilang(langname) {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langname));
+        document.querySelector('.language').appendChild(li);
+    }
+    addoptilang('PHP');
+    addoptilang('Swift');
+
+    // edit
+
+    document.querySelector('li:nth-child(2)').textContent = 'Python 3';
+
+    const econdlang = document.querySelector('li:nth-child');
+    secondlang.outerHTML = '<li>JavaScript</li>';
+
+    // remove
+    const lastlang = document.querySelector('.language li:last-child');
+    lastlang.remove();
+</script>
+
+
+</html>

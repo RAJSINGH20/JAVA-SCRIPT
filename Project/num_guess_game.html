@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f0ff 0%, #f8f9fa 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            background: #fff;
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 36px 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 40, 120, 0.10), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e6eaf0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a2a4a;
+            margin-bottom: 16px;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #4a5a6a;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 32px 0 0 0;
+        }
+
+        label {
+            font-size: 1.05rem;
+            color: #22334d;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        input[type="text"] {
+            padding: 10px 12px;
+            border: 1.5px solid #b5c7e3;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0078d7;
+            background: #f4f8ff;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(90deg, #0078d7 0%, #005fa3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 120, 215, 0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, #005fa3 0%, #0078d7 100%);
+            box-shadow: 0 4px 16px rgba(0, 120, 215, 0.12);
+        }
+
+        .resultParas {
+            margin-top: 24px;
+            background: #f6fafd;
+            border-radius: 10px;
+            padding: 18px 14px;
+            box-shadow: 0 2px 8px rgba(0, 40, 120, 0.04);
+            border: 1px solid #e6eaf0;
+        }
+
+        .guesses,
+        .lastResult {
+            font-weight: bold;
+            color: #0078d7;
+            font-size: 1.08rem;
+        }
+
+        .remainingGuesses {
+            font-weight: 500;
+            color: #e67e22;
+            font-size: 1.05rem;
+        }
+
+        .lowOrHi {
+            text-align: center;
+            font-size: 1.15rem;
+            margin-top: 14px;
+            color: #e67e22;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .button {
+            display: block;
+            margin: 28px auto 0 auto;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #28a745 0%, #218838 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.10);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .button:hover {
+            background: linear-gradient(90deg, #218838 0%, #28a745 100%);
+            box-shadow: 0 4px 16px rgba(40, 167, 69, 0.14);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between 1 and 100</p>
+        <form>
+            <label for="guessField">Enter your guess:</label>
+            <input type="text" id="guessField" class="guessField" placeholder="Enter a number" required />
+            <input type="submit" value="Submit guess" id="subt" class="guessSubmit" />
+        </form>
+
+        <div class="resultParas">
+            <p>Previous guesses: <span class="guesses"></span></p>
+            <p>Current guess: <span class="lastResult"></span></p>
+            <p>Remaining guesses: <span class="remainingGuesses"></span></p>
+            <div class="lowOrHi"></div>
+        </div>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        const submit = document.querySelector('#subt');
+        const userInput = document.querySelector('#guessField');
+        const guesses = document.querySelector('.guesses');
+        const lastResult = document.querySelector('.lastResult');
+        const resultParas = document.querySelector('.resultParas');
+        const remainingGuessesText = document.querySelector('.remainingGuesses');
+        const lowOrHi = document.querySelector('.lowOrHi');
+
+        let prevGuesses = [];
+        let numGuesses = 1;
+        let playGame = true;
+
+        submit.addEventListener('click', function (e) {
+            e.preventDefault();
+            const guess = parseInt(userInput.value);
+            validateGuess(guess);
+        });
+
+        function validateGuess(guess) {
+            if (isNaN(guess)) {
+                alert("Please enter a valid number");
+            } else if (guess < 1 || guess > 100) {
+                alert("Enter number between 1 and 100");
+            } else {
+                prevGuesses.push(guess);
+                if (numGuesses === 10) {
+                    displayGuess(guess);
+                    displayMessage(`Game Over! The number was ${randomNumber}`);
+                    endGame();
+                } else {
+                    displayGuess(guess);
+                    checkGuess(guess);
+                }
+            }
+        }
+
+        function checkGuess(guess) {
+            if (guess === randomNumber) {
+                displayMessage(`Congratulations! ${guess} is correct!`);
+                endGame();
+            } else if (guess < randomNumber) {
+                displayMessage(`Too low! Try again.`);
+            } else {
+                displayMessage(`Too high! Try again.`);
+            }
+        }
+
+        function displayGuess(guess) {
+            userInput.value = '';
+            guesses.innerHTML += `${guess} `;
+            lastResult.textContent = guess;
+            remainingGuessesText.textContent = `${10 - numGuesses} guesses left`;
+            numGuesses++;
+        }
+
+        function displayMessage(message) {
+            lowOrHi.textContent = message;
+        }
+
+        function endGame() {
+            userInput.disabled = true;
+            submit.disabled = true;
+            const newGameBtn = document.createElement('button');
+            newGameBtn.textContent = 'Start New Game';
+            newGameBtn.classList.add('button');
+            resultParas.appendChild(newGameBtn);
+            newGameBtn.addEventListener('click', function () {
+                resetGame();
+            });
+        }
+
+        function resetGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            prevGuesses = [];
+            numGuesses = 1;
+            guesses.textContent = '';
+            lastResult.textContent = '';
+            lowOrHi.textContent = '';
+            userInput.disabled = false;
+            submit.disabled = false;
+            userInput.value = '';
+            remainingGuessesText.textContent = '10 guesses left';
+            const newGameBtn = document.querySelector('.button');
+            resultParas.removeChild(newGameBtn);
+        }
+    </script>
+</body>
+
+</html>
