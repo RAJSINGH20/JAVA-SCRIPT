@@ -1,9 +1,9 @@
 let score = "33"
-// console.log(typeof score)
+console.log(typeof score)
 
 let valueinnum = Number(score)
 
-// console.log(typeof valueinnum);
+console.log(typeof valueinnum);
 // console.log(valueinnum)
 
 
@@ -12,9 +12,9 @@ let valueinnum = Number(score)
 // true =>1; false =>0
 
 
-let isloggedin = 1
+let isloggedin = 0
 
-// console.log(Boolean(isloggedin));
+console.log(Boolean(isloggedin));
 
 
 //1 => true; 0 => false
@@ -22,7 +22,7 @@ let isloggedin = 1
 // "raj" => true
 
 
-// ***************************OPERATIONS*****************************
+// ***************************OPERATORS*****************************
 
 
 
@@ -49,17 +49,17 @@ let str3 = str1 + str2;
 
 //problems
 
-// console.log("1" +2);       // not accepted by comapny
-// console.log(1 +"2");       // not accepted by comapny
-// console.log(1 +2 + "2");   // not accepted by comapny
-// console.log("1" +2 + 2);   // not accepted by comapny
+// console.log("1" +2);       // not accepted by company
+// console.log(1 +"2");       // not accepted by company
+// console.log(1 +2 + "2");   // not accepted by company
+// console.log("1" +2 + 2);   // not accepted by company
 
 // console.log(+true);
 
 
 let num1, num2, num3
 
-num1= num2=num3 =2+2
+num1=num2=num3 =2+2
 // console.log(num1);
 // console.log(num2);
 // console.log(num3);

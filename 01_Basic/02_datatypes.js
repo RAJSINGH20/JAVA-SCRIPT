@@ -1,8 +1,8 @@
-//"use strict";  //traet all js code as newer version of javvascript
+//"use strict";  //traet all js code as newer version of javascript
 
 // alert("hello") // we r using node js not browser
 
-console.log(3 + 4)   // code readibility id high
+console.log(3 + 4)   // code readability is high
 console.log("hello") 
 
 let name="Raj"
@@ -10,7 +10,7 @@ let age = 25
 let loggedIn = true
 
 //number => to power 53
-// bigint
+// bigint  
 // string =>""
 // boolean =>true/false
 // null => empty value
@@ -20,4 +20,4 @@ let loggedIn = true
 // object 
 
 console.log(typeof null)  //object
-console.log(typeof undefined)  //undefiendf
+console.log(typeof undefined)  //undefiend

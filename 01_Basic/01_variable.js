@@ -1,7 +1,8 @@
 const accountId = 1234567890;
 var accountName = "John Doe";
 let accountBalance = 1000.50;
-//accountBalance = 1200.75; // Reassigning value to let variable
+accountBalance = 1200.75; // Reassignin value to let variable
+
 
 console.log("Account ID:", accountId);
 
@@ -16,3 +17,4 @@ console.table([
     accountName,
     accountBalance
 ]);
+console.log(accountBalance,accountId,accountName)

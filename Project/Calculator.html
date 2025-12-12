@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +13,15 @@
             align-items: center;
             height: 100vh;
         }
+
         .calculator {
             background: #232323;
             padding: 20px 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             width: 320px;
         }
+
         .display {
             width: 100%;
             height: 50px;
@@ -31,11 +34,13 @@
             padding: 10px;
             box-sizing: border-box;
         }
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
+
         .buttons button {
             padding: 20px 0;
             font-size: 1.2em;
@@ -46,21 +51,25 @@
             cursor: pointer;
             transition: background 0.2s;
         }
+
         .buttons button.operator {
             background: #ff9500;
             color: #fff;
         }
+
         .buttons button.equal {
             background: #34c759;
             color: #fff;
             grid-column: span 2;
         }
+
         .buttons button:active {
             background: #444;
         }
     </style>
     <title>Calculator</title>
 </head>
+
 <body>
     <div class="calculator">
         <div class="display" id="display">0</div>
@@ -85,14 +94,14 @@
     </div>
 </body>
 <script>
-    const display = document.getElementById('display') ;
+    const display = document.getElementById('display');
     const buttons = document.querySelectorAll('.buttons button');
 
-    let currentinput='';
-    let operator=''
-    let firstoperand=''
-    let secondoperand=''
-    let result=''
+    let currentinput = '';
+    let operator = ''
+    let firstoperand = ''
+    let secondoperand = ''
+    let result = ''
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const value = button.textContent;
@@ -118,4 +127,5 @@
         });
     });
 </script>
+
 </html>

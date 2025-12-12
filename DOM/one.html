@@ -1,96 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Easy Calculator</title>
   <style>
-    body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #222;
-  font-family: Arial, sans-serif;
-}
+    :root{
+      --bg: #0f1724;
+      --card: #111827;
+      --accent: #06b6d4;
+      --operator: #f59e0b;
+      --equals: #10b981;
+      --muted: #94a3b8;
+      --text: #e6eef6;
+      --glass: rgba(255,255,255,0.04);
+      font-size: 16px;
+    }
 
-.calculator {
-  background: #333;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  width: 250px;
-}
+    *{box-sizing: border-box; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    html,body{height:100%; margin:0; background: linear-gradient(180deg, #041024 0%, var(--bg) 100%); color:var(--text); display:flex; align-items:center; justify-content:center; padding:20px;}
 
-.display {
-  background: #000;
-  color: #0f0;
-  font-size: 32px;
-  padding: 15px;
-  text-align: right;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  height: 60px;
-}
+    .calculator {
+      width: 320px;
+      max-width: 100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
 
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
+    .title {
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      font-size: 1.05rem;
+      color: var(--accent);
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
 
-button {
-  padding: 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  background: #555;
-  color: white;
-  /* No JS functionality */
-}
+    #display {
+      width: 100%;
+      height: 56px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      padding: 10px 14px;
+      font-size: 1.5rem;
+      text-align: right;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));
+      color: var(--text);
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.6);
+      margin-bottom: 14px;
+    }
 
-button.operator {
-  background: #f39c12;
-  color: #fff;
-}
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
 
-button.equals {
-  background: #27ae60;
-  color: #fff;
-}
+    .keys button {
+      height: 52px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.05rem;
+      cursor: pointer;
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 6px 14px rgba(2,6,23,0.45);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.08s;
+      user-select: none;
+    }
 
+    .keys button:active { transform: translateY(2px); }
+    .keys button:hover { opacity: 0.95; }
+
+    .operator { background: linear-gradient(180deg,var(--operator), #d97706); color: #071015; font-weight:600; }
+    .equals   { background: linear-gradient(180deg,var(--equals), #059669); color: #02140f; font-weight:700; grid-column: span 1; }
+
+    .wide { grid-column: span 2; } /* useable if you want a wider key */
+
+    /* smaller screens */
+    @media (max-width:360px){
+      #display { height:48px; font-size:1.25rem; }
+      .keys button { height:48px; font-size:1rem; }
+      .calculator { padding:14px; }
+    }
   </style>
-  <script>
-    var num = document.querySelector('.NUM')
-    console.log(num);
-    
-    
-  </script>
 </head>
 <body>
-  <div class="calculator">
-    <div class="display">0</div>
-    <div class="buttons">
-      <button class="NUM" >7</button>
-      <button onclick="num">8</button>
-      <button onclick="num">9</button>
-      <button class="operator" onclick="operator">/</button>
-      
-      <button onclick="num">4</button>
-      <button onclick="num">5</button>
-      <button onclick="num">6</button>
-      <button class="operator" onclick="operator">*</button>
-      
-      <button onclick="num">1</button>
-      <button onclick="num">2</button>
-      <button onclick="num">3</button>
-      <button class="operator" onclick="operator">-</button>
-      
-      <button>0</button>
-      <button>.</button>
-      <button class="equals" onclick="operator">=</button>
-      <button class="operator" onclick="operator">+</button>
+
+  <div class="calculator" role="application" aria-label="Simple calculator">
+    <h3 class="title">Calculator</h3>
+
+    <input id="display" type="text" readonly value="" aria-label="Calculator display">
+
+    <div class="keys">
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button class="operator" onclick="press('/')">/</button>
+
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button class="operator" onclick="press('*')">*</button>
+
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button class="operator" onclick="press('-')">-</button>
+
+      <button onclick="press('0')">0</button>
+      <button onclick="press('.')">.</button>
+      <button class="equals" onclick="calculate()">=</button>
+      <button class="operator" onclick="press('+')">+</button>
     </div>
   </div>
+
+  <script>
+    let current = "";
+    const displayEl = document.getElementById("display");
+
+    function press(val) {
+      current += val;
+      displayEl.value = current;
+    }
+
+    function calculate() {
+      try {
+        // eslint-disable-next-line no-eval
+        current = eval(current);
+        displayEl.value = current;
+      } catch {
+        displayEl.value = "Error";
+        current = "";
+      }
+    }
+  </script>
+
 </body>
 </html>

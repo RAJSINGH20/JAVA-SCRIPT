@@ -35,6 +35,11 @@ const mufuncytion = function (){
     
 }
 
+const mfunction =()=>{
+    console.log("hello world");
+    
+}
+
 console.log(typeof bignumber);
 
 
