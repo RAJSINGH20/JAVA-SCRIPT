@@ -115,7 +115,9 @@
       <button onclick="press('0')">0</button>
       <button onclick="press('.')">.</button>
       <button class="equals" onclick="calculate()">=</button>
-      <button class="operator" onclick="press('+')">+</button>
+      <button class="operator" onclick="press('+')">+</button><br>
+      <button class="operator wide" onclick="del()">DEL</button>
+      <button class="clear" onclick="AllClear()">AC</button>
     </div>
   </div>
 
@@ -125,6 +127,10 @@
 
     function press(val) {
       current += val;
+      displayEl.value = current;
+    }
+    function del(){
+      current = current.slice(0, -1);
       displayEl.value = current;
     }
 
@@ -137,6 +143,11 @@
         displayEl.value = "Error";
         current = "";
       }
+    }
+
+    function AllClear() {
+      current = "";
+      displayEl.value = current;
     }
   </script>
 
